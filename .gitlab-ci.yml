@@ -1,0 +1,32 @@
+stages:
+  - build
+  - deploy
+
+variables:
+  STAGING_TAG: "staging"
+  PRODUCTION_TAG: "prod"
+
+# Build job (to build the application)
+build:
+  stage: build
+  script:
+    - echo "Building the application..."
+
+# Deploy to Staging based on tags starting with 'staging-'
+deploy_staging:
+  stage: deploy
+  only:
+    - /^staging-.*/  # Will trigger on tags that start with 'staging-'
+  script:
+    - echo "Deploying to Staging..."
+    - ./deploy_to_staging.sh  # Custom script to deploy to staging
+
+# Deploy to Production based on tags starting with 'prod-'
+deploy_production:
+  stage: deploy
+  only:
+    - /^prod-.*/  # Will trigger on tags that start with 'prod-'
+  script:
+    - echo "Deploying to Production..."
+    - ./deploy_to_production.sh  # Custom script to deploy to production
+
