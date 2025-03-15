@@ -1,0 +1,50 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout the code from the repository
+                git 'https://github.com/shiva97054/work.git'
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                // Install npm dependencies
+                sh 'npm install'
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                // Run tests
+                sh 'npm test'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                // Build the project
+                sh 'npm run build'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                // Deploy the build to a server (adjust as per your needs)
+                sh '''
+                scp -r ./dist/ user@server:/var/www/html/
+                '''
+            }
+        }
+    }
+
+    post {
+        // Notifications or actions after the pipeline
+        always {
+            echo 'Pipeline finished'
+        }
+    }
+}
+
