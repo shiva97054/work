@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 Line from devop1
+=======
+Line from devop2
+>>>>>>> devop2
