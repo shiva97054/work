@@ -1,0 +1,6 @@
+version: v1
+metadata:
+conatiner :2
+image name:
+port:80
+
